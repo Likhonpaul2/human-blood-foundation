@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { Link, useNavigate } from 'react-router';
 import toast from 'react-hot-toast';
-import axios from 'axios';
+import { imageUpload } from '../../api/utils/utils';
 
 const Register = () => {
   const { CreateUserWithEmailAndPassword, UpdateUserPhotoAndName } = useContext(AuthContext);
@@ -48,15 +48,16 @@ const Register = () => {
     const name = form?.name?.value;
     const email = form?.email?.value;
 
+    // image upload 
     const image = form?.avatar?.files?.[0];
-    const imageFormData = new FormData();
-    imageFormData.append("image", image)
+    const ImageUrl = await imageUpload(image);
+
 
     const bloodGroup = form?.bloodGroup?.value;
-    const district = form?.district?.value;
-    const districtObj = districts.find(d => d.id === district )
+    const districtID = form?.district?.value;
+    const districtObj = districts.find(d => d.id === districtID)
     const districtName = districtObj?.name;
-    
+
 
 
     const upazila = form?.upazila?.value;
@@ -64,17 +65,37 @@ const Register = () => {
     const confirmPassword = form?.confirm_password?.value;
 
 
+    const role = "donor";
+    const status = 'active';
+    const created_at = new Date().toISOString();
+    const last_logged_in = new Date().toISOString();
 
-    const userRegisterData = { name, email, image, bloodGroup, districtName, upazila, password, confirmPassword };
-    console.log(userRegisterData)
 
 
-    const { data } = await axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imgbb_api_key}`, imageFormData)
-    const ImageUrl = data?.data?.display_url;
-    console.log(ImageUrl)
+    const userRegisterData = { name, email, ImageUrl, bloodGroup, districtID, districtName, upazila,  confirmPassword, role, status, created_at, last_logged_in };
+    // console.log(userRegisterData)
+
 
     // register user 
     createUser(email, password, name, ImageUrl)
+
+    // save date in the database 
+    fetch(`${import.meta.env.VITE_server}users`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify(userRegisterData)
+    })
+      .then((res) => res.json())
+      .then(() => {
+        toast.success("Data Save Successfully");
+      })
+      .catch(error => {
+        console.log(error)
+      })
+
+
   }
 
   const createUser = (email, password, name, photoURL) => {

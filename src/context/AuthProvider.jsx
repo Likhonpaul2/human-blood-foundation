@@ -69,6 +69,18 @@ const AuthProvider = ({ children }) => {
         }
     }, [])
 
+    const [userStatus, setUserStatus] = useState({})
+
+    // fetch user info
+    useEffect(() => {
+        fetch(`${import.meta.env.VITE_server}users/${user?.email}`)
+            .then(res => res.json())
+            .then(data => {
+                setUserStatus(data.status);
+                //   setPreviewImage(data.ImageUrl);
+            });
+    }, [user?.email]);
+
     const userInfo = {
         user,
         loading,
@@ -79,6 +91,7 @@ const AuthProvider = ({ children }) => {
         UpdateUserPhotoAndName,
         darkMode,
         setDarkMode,
+        userStatus
     }
 
 

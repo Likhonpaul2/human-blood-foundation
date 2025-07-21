@@ -65,7 +65,7 @@ const Navbar = () => {
         SignOut()
             .then(() => {
                 toast.success("Logout Successfully")
-             })
+            })
             .catch((err) => console.error(err));
     }
 
@@ -92,24 +92,29 @@ const Navbar = () => {
                     </ul>
                 </div>
                 {user ? (
-                    <>
-                        <div className="relative group">
-                            <img
-                                src={user?.photoURL || "https://i.ibb.co/2kR5zq0/default-avatar.png"}
-                                alt="User"
-                                className="w-10 h-10 rounded-full border-2 border-orange-400 object-cover cursor-pointer"
-                            />
-                            <div className="absolute left-1/2 -translate-x-1/2 mt-2 px-3 py-1 bg-gray-800 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition pointer-events-none z-10 whitespace-nowrap">
-                                {user?.displayName}
+                    <div className="dropdown dropdown-end">
+                        <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                            <div className="w-10 rounded-full border-2 border-orange-400">
+                                <img
+                                    src={user?.photoURL || "https://i.ibb.co/2kR5zq0/default-avatar.png"}
+                                    alt="User"
+                                    className="object-cover"
+                                />
                             </div>
-                        </div>
-                        <button
-                            onClick={handleLogout}
-                            className="bg-red-600 text-white px-4 py-2 ml-3 rounded hover:bg-red-700 cursor-pointer"
-                        >
-                            Logout
-                        </button>
-                    </>
+                        </label>
+                        <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-40">
+                            <li>
+                                <Link to="/dashboard" className="justify-between">
+                                    Dashboard
+                                </Link>
+                            </li>
+                            <li>
+                                <button onClick={handleLogout} className='bg-red-600/20'>
+                                    Logout
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
                 ) : (
                     <Link to="/login">
                         <button className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 cursor-pointer">

@@ -5,7 +5,8 @@ import { AuthContext } from '../../context/AuthContext';
 import toast from 'react-hot-toast';
 
 const Navbar = () => {
-    const { user, SignOut } = useContext(AuthContext);
+    const { user, SignOut, userRole } = useContext(AuthContext);
+
 
     const navLinks = <>
         <li>
@@ -104,9 +105,33 @@ const Navbar = () => {
                         </label>
                         <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-40">
                             <li>
-                                <Link to="/dashboard" className="justify-between">
-                                    Dashboard
-                                </Link>
+                                <>
+                                    {
+                                        (() => {
+                                            if (!userRole) return null;
+
+                                            if (userRole.role === "admin") {
+                                                return (
+                                                    <Link to="/dashboard/admin" className="justify-between">
+                                                        Dashboard
+                                                    </Link>
+                                                );
+                                            } else if (userRole.role === "volunteer") {
+                                                return (
+                                                    <Link to="/dashboard/volunteer" className="justify-between">
+                                                        Dashboard
+                                                    </Link>
+                                                );
+                                            } else {
+                                                return (
+                                                    <Link to="/dashboard" className="justify-between">
+                                                        Dashboard
+                                                    </Link>
+                                                );
+                                            }
+                                        })()
+                                    }
+                                </>
                             </li>
                             <li>
                                 <button onClick={handleLogout} className='bg-red-600/20'>

@@ -11,6 +11,12 @@ import DashboardHome from "../dashboard/donor/DashboardHome";
 import CreateRequest from "../dashboard/donor/CreateRequest";
 import MyRequest from "../dashboard/donor/MyRequest";
 import UpdateDetails from "../shared/UpdateDetails/UpdateDetails";
+import DashboardHomeAdmin from "../dashboard/admin/DashboardHomeAdmin";
+import AllUsers from "../dashboard/admin/AllUsers";
+import AllRequest from "../dashboard/admin/AllRequest";
+import ContentManagement from "../dashboard/admin/ContentManagement";
+import AddBlogPage from "../dashboard/admin/AddBlogPage";
+import SearchDonors from "../pages/SearchPage/SearchDonors";
 
 export const router = createBrowserRouter([
     {
@@ -28,6 +34,10 @@ export const router = createBrowserRouter([
             {
                 path: "/register",
                 element: <Register />
+            },
+            {
+                path: "/search-donors",
+                element: <SearchDonors/>
             }
         ]
     },
@@ -40,20 +50,60 @@ export const router = createBrowserRouter([
                 element: <OverView />
             },
             {
-                path:"/dashboard/profile",
-                element: <ProfilePage/>
+                path: "/dashboard/profile",
+                element: <ProfilePage />
             },
             {
-                path:"/dashboard/create-donation",
-                element: <CreateRequest/>
+                path: "/dashboard/create-donation",
+                element: <CreateRequest />
             },
             {
-                path:"/dashboard/my-donation-requests",
-                element: <MyRequest/>
+                path: "/dashboard/my-donation-requests",
+                element: <MyRequest />
             },
             {
-                path:"/dashboard/edit-donation/:id",
-                element: <UpdateDetails/>
+                path: "/dashboard/edit-donation/:id",
+                element: <UpdateDetails />
+            },
+
+
+
+            {
+                path: "/dashboard/admin",
+                // index: true,
+                element: <DashboardHomeAdmin />
+            },
+            {
+                path: "/dashboard/all-users",
+                element: <AllUsers />
+            },
+            {
+                path: "/dashboard/all-blood-donation-request",
+                element: <AllRequest />
+            },
+            {
+                path: "/dashboard/content-management",
+                element: <ContentManagement />
+            },
+            {
+                path: "/dashboard/content-management/add-blog",
+                element: <AddBlogPage />
+            },
+
+
+
+            {
+                path: "/dashboard/volunteer",
+                // index: true,
+                element: <DashboardHomeAdmin />
+            },
+            {
+                path: "/dashboard/all-blood-donation-request/volunteer",
+                element: <AllRequest />
+            },
+            {
+                path: "/dashboard/content-management/volunteer",
+                element: <ContentManagement />
             },
 
         ]

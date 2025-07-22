@@ -36,7 +36,7 @@ const OverView = () => {
 
     if (result.isConfirmed) {
       try {
-        const res = await fetch(`${import.meta.env.VITE_SERVER}/donation-requests/${id}`, {
+        const res = await fetch(`${import.meta.env.VITE_SERVER}donation-requests-delete/${id}`, {
           method: "DELETE",
         });
         const data = await res.json();
@@ -73,7 +73,7 @@ const OverView = () => {
     <div className="p-6">
       <h2 className="text-3xl font-semibold mb-4">Welcome back, {user?.displayName}!</h2>
 
-      {donationRequests.length > 0 && (
+      {donationRequests.length > 0 ?
         <>
           <h3 className="text-xl font-medium mb-2">Your Recent Donation Requests</h3>
           <div className="overflow-x-auto">
@@ -160,7 +160,20 @@ const OverView = () => {
             </button>
           </div>
         </>
-      )}
+
+        :
+        <>
+          <div className="p-8 text-center">
+            <h2 className="text-3xl font-bold mb-4">Welcome, {user?.displayName}!</h2>
+            <p className="text-gray-500 text-lg mb-4">You haven't created any donation request yet.</p>
+            <button
+              onClick={() => navigate("/dashboard/create-donation")}
+              className="btn bg-red-600 text-white"
+            >
+              Create Donation Request
+            </button>
+          </div>
+        </>}
     </div>
   );
 };

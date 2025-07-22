@@ -21,7 +21,7 @@ const Navbar = () => {
         </li>
         <li>
             <NavLink
-                to="/blood-requests"
+                to="/blood-donation-request"
                 className={({ isActive }) =>
                     isActive ? "text-[#FF5757]" : ""
                 }

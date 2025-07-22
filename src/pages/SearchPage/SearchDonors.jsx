@@ -29,7 +29,11 @@ const SearchDonors = () => {
         const res = await fetch(`${import.meta.env.VITE_server}donors?bloodGroup=${bloodGroup}&districtID=${selectedDistrict}&upazila=${selectedUpazila}`);
         const data = await res.json();
         setDonors(data);
+        console.log(data)
     };
+
+
+    console.log(bloodGroup, selectedDistrict, selectedUpazila)
 
     return (
         <div className="max-w-4xl mx-auto p-6">
@@ -80,7 +84,7 @@ const SearchDonors = () => {
             </form>
 
             {/* Donor Results */}
-            {donors.length > 0 && (
+            {donors.length > 0 ? (
                 <div className="mt-10">
                     <h3 className="text-xl font-semibold mb-4">Donors Found:</h3>
                     <div className="grid gap-4">
@@ -88,14 +92,20 @@ const SearchDonors = () => {
                             <div key={donor._id} className="border p-4 rounded shadow">
                                 <p><strong>Name:</strong> {donor.name}</p>
                                 <p><strong>Blood Group:</strong> {donor.bloodGroup}</p>
-                                <p><strong>District:</strong> {donor.district}</p>
+                                <p><strong>District:</strong> {donor.districtName}</p>
                                 <p><strong>Upazila:</strong> {donor.upazila}</p>
-                                <p><strong>Phone:</strong> {donor.phone}</p>
                             </div>
                         ))}
                     </div>
                 </div>
+            ) : (
+                (
+                    <div className="mt-10 text-red-500 text-center font-medium">
+                        No donors found for your search.
+                    </div>
+                )
             )}
+
         </div>
     );
 };

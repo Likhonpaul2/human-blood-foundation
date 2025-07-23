@@ -6,6 +6,7 @@ const DashboardHomeAdmin = () => {
     const { user } = useContext(AuthContext);
     const [donor, setDonor] = useState([]);
     const [bloodReq, setBloodReq] = useState([]);
+    const[totalFunds, setTotalFunds] = useState(null)
 
 
     useEffect(() => {
@@ -24,6 +25,15 @@ const DashboardHomeAdmin = () => {
 
 
     }, [])
+    useEffect(() => {
+        fetch(`${import.meta.env.VITE_server}payment/total-funds`)
+            .then((res) => res.json())
+            .then((data) => {
+                console.log("Total funds:", data.totalAmount);
+                setTotalFunds(data.totalAmount);
+            });
+    }, []);
+
     return (
         <div>
             <div className="p-6">
@@ -55,7 +65,7 @@ const DashboardHomeAdmin = () => {
                                 <HandCoins className="w-6 h-6" />
                             </div>
                             <div>
-                                <h4 className="text-2xl font-bold">${0}</h4>
+                                <h4 className="text-2xl font-bold">৳ {totalFunds}</h4>
                                 <p className="text-sm text-gray-600">Total Funds Donated</p>
                             </div>
                         </div>

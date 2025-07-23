@@ -83,7 +83,7 @@ const AuthProvider = ({ children }) => {
 
 
 
-
+    // fatch role form DB 
     const [userRole, setUserRole] = useState({});
     useEffect(() => {
         fetch(`${import.meta.env.VITE_server}users/${user?.email}`)

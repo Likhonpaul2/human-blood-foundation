@@ -15,7 +15,7 @@ const Banner = () => {
             Join as a Donor
           </Link>
           <Link
-            to="/search"
+            to="/search-donors"
             className="bg-white border border-red-600 text-red-600 hover:bg-red-600 hover:text-white px-6 py-3 rounded-lg transition"
           >
             Search Donors

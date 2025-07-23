@@ -21,6 +21,7 @@ import BloodDonationRequests from "../pages/BloodDonationRequest/BloodDonationRe
 import DonationRequestDetails from "../pages/BloodDonationRequest/DonationRequestDetails";
 import BlogListPage from "../pages/Blogs/BlogListPage";
 import BlogDetailPage from "../pages/Blogs/BlogDetailPage";
+import FundingPage from "../pages/FundingPage/FundingPage";
 
 export const router = createBrowserRouter([
     {
@@ -58,6 +59,10 @@ export const router = createBrowserRouter([
             {
                 path: "/blogs/:id",
                 element: <BlogDetailPage/>
+            },
+            {
+                path: "/funding",
+                element: <FundingPage/>
             },
         ]
     },

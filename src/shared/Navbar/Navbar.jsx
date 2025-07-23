@@ -41,7 +41,7 @@ const Navbar = () => {
         </li>
         <li>
             <NavLink
-                to="/support-us"
+                to="/funding"
                 className={({ isActive }) =>
                     isActive ? "text-[#FF5757]" : ""
                 }
@@ -72,7 +72,7 @@ const Navbar = () => {
 
     return (
         <div>
-            <div className="navbar bg-base-100 ">
+            <div className="navbar bg-base-100 sticky top-0">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

@@ -12,7 +12,7 @@ const BloodDonationRequests = () => {
   }, []);
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-10">
+    <div className="max-w-6xl mx-auto px-4 py-10 min-h-screen">
       <h2 className="text-2xl font-bold mb-6">Pending Blood Donation Requests</h2>
 
       {requests.length === 0 ? (

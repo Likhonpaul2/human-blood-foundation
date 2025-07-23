@@ -1,9 +1,7 @@
-// DonationRequestDetails.jsx
 import { useParams, useNavigate } from "react-router";
 import { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import toast from "react-hot-toast";
-// import { AuthContext } from "../../providers/AuthProvider";
 
 const DonationRequestDetails = () => {
     const { id } = useParams();
@@ -14,19 +12,14 @@ const DonationRequestDetails = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        document.title = "Donation request ||Human Blood Foundation"
-    }, [])
+        document.title = "Donation Request | Human Blood Foundation";
+    }, []);
 
     useEffect(() => {
-        if (!user) {
-            navigate("/login");
-        } else {
-            fetch(`${import.meta.env.VITE_server}donation-requests/${id}`)
-                .then((res) => res.json())
-                .then((data) => setRequest(data));
-        }
-    }, [id, user, navigate]);
-
+        fetch(`${import.meta.env.VITE_server}donation-requests/${id}`)
+            .then((res) => res.json())
+            .then((data) => setRequest(data));
+    }, [id, navigate]);
 
     const handleConfirmDonation = async () => {
         const res = await fetch(`${import.meta.env.VITE_server}donation-requests/donate/${id}`, {
@@ -37,57 +30,90 @@ const DonationRequestDetails = () => {
                 donorEmail: user.email,
             }),
         });
+
         const result = await res.json();
         if (result.modifiedCount) {
             toast.success("Donation confirmed!");
             setShowModal(false);
-            navigate("/"); // Or wherever you want to redirect
-
+            navigate("/");
         }
     };
 
     if (!request) return <p className="text-center mt-10">Loading...</p>;
 
     return (
-        <div className="max-w-3xl mx-auto p-6">
-            <h2 className="text-2xl font-bold mb-4">Donation Request Details</h2>
-            <div className="bg-white shadow-md p-4 rounded border">
-                <p><strong>Recipient:</strong> {request.recipientName}</p>
-                <p><strong>Hospital:</strong> {request.hospitalName}</p>
-                <p><strong>Location:</strong> {request.districtName} {request.upazila}</p>
-                <p><strong>Blood Group:</strong> {request.bloodGroup}</p>
-                <p><strong>Date:</strong> {request.donationDate}</p>
-                <p><strong>Time:</strong> {request.donationTime}</p>
-                <p><strong>Message:</strong> {request.message}</p>
+        <div className="max-w-4xl mx-auto px-6 py-10 min-h-screen">
+            <h2 className="text-3xl font-bold text-red-700 mb-6 text-center">
+                🩸 Donation Request Details
+            </h2>
+
+            <div className="bg-white rounded-xl shadow-md p-6 border space-y-3">
+                <div>
+                    <p className="text-lg font-semibold text-gray-700">
+                        <span className="text-gray-600">Recipient:</span> {request.recipientName}
+                    </p>
+                    <p>
+                        <span className="font-medium text-gray-600">Hospital:</span> {request.hospitalName}
+                    </p>
+                    <p>
+                        <span className="font-medium text-gray-600">Location:</span> {request.districtName}, {request.upazila}
+                    </p>
+                    <p>
+                        <span className="font-medium text-gray-600">Blood Group:</span>{" "}
+                        <span className="inline-block bg-red-100 text-red-700 font-semibold px-2 py-1 rounded-full text-sm">
+                            {request.bloodGroup}
+                        </span>
+                    </p>
+                    <p>
+                        <span className="font-medium text-gray-600">Date:</span> {request.donationDate}
+                    </p>
+                    <p>
+                        <span className="font-medium text-gray-600">Time:</span> 
+                        {new Date(`${request.donationDate}T${request.donationTime}`).toLocaleTimeString([], {
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            hour12: true,
+                        })}
+                    </p>
+                    <p>
+                        <span className="font-medium text-gray-600">Message:</span> {request.message}
+                    </p>
+                </div>
 
                 <button
                     onClick={() => setShowModal(true)}
-                    className="mt-4 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded"
+                    className="mt-4 bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg shadow-md transition duration-300"
                 >
-                    Donate
+                    ❤️ Donate Now
                 </button>
             </div>
 
             {/* Modal */}
             {showModal && (
-                <div className="fixed inset-0 bg-black/10 bg-opacity-40 flex items-center justify-center z-50">
-                    <div className="bg-white p-6 rounded shadow-md w-full max-w-md">
-                        <h3 className="text-lg font-bold mb-4">Confirm Donation</h3>
-                        <p><strong>Your Name:</strong> {user.displayName}</p>
-                        <p><strong>Your Email:</strong> {user.email}</p>
+                <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 px-4">
+                    <div className="bg-white rounded-xl shadow-lg p-6 w-full max-w-md">
+                        <h3 className="text-xl font-bold text-center mb-4">Confirm Donation</h3>
+                        <div className="space-y-2 text-gray-700">
+                            <p>
+                                <strong>Your Name:</strong> {user.displayName}
+                            </p>
+                            <p>
+                                <strong>Your Email:</strong> {user.email}
+                            </p>
+                        </div>
 
-                        <div className="mt-6 flex justify-end space-x-3">
+                        <div className="mt-6 flex justify-end gap-3">
                             <button
                                 onClick={() => setShowModal(false)}
-                                className="bg-gray-300 hover:bg-gray-400 text-black px-4 py-2 rounded"
+                                className="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded-md transition"
                             >
                                 Cancel
                             </button>
                             <button
                                 onClick={handleConfirmDonation}
-                                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
+                                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition"
                             >
-                                Confirm
+                                Confirm Donation
                             </button>
                         </div>
                     </div>

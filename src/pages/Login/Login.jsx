@@ -18,7 +18,7 @@ const Login = () => {
     const navigate = useNavigate();
 
     const onSubmit = (data) => {
-        console.log(data.email, data.password)
+        // console.log(data.email, data.password)
         setLoading(true);
         SignInEmailAndPass(data.email, data.password)
             .then(() => {

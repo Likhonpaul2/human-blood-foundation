@@ -8,7 +8,7 @@ const ProtectedRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
   const location = useLocation();
 
-  if (loading) return <Loader />;
+  if (!loading) return <Loader />;
 
   if (!user) {
     return <Navigate to="/login" state={{ from: location }} replace />;

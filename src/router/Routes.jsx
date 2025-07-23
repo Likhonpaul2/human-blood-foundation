@@ -22,11 +22,13 @@ import DonationRequestDetails from "../pages/BloodDonationRequest/DonationReques
 import BlogListPage from "../pages/Blogs/BlogListPage";
 import BlogDetailPage from "../pages/Blogs/BlogDetailPage";
 import FundingPage from "../pages/FundingPage/FundingPage";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
 
 export const router = createBrowserRouter([
     {
         path: "/",
         element: <MainLayout />,
+        // errorElement: <ErrorPage />,
         children: [
             {
                 index: true,
@@ -69,6 +71,7 @@ export const router = createBrowserRouter([
     {
         path: "/dashboard",
         element: <DashBoardLayout />,
+        errorElement: <ErrorPage />,
         children: [
             {
                 index: true,
@@ -114,7 +117,6 @@ export const router = createBrowserRouter([
                 path: "/dashboard/content-management/add-blog",
                 element: <ProtectedRoute><AddBlogPage /></ProtectedRoute>
             },
-
 
 
             {

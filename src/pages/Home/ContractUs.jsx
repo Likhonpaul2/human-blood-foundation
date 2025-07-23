@@ -1,6 +1,7 @@
 import { useState } from "react";
+import { FaPhoneAlt, FaEnvelope, FaUser, FaPaperPlane } from "react-icons/fa";
 
-const ContractUs = () => {
+const ContactUs = () => {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
 
   const handleChange = (e) => {
@@ -14,48 +15,71 @@ const ContractUs = () => {
   };
 
   return (
-    <section className="py-16 px-4 bg-white" id="contact">
+    <section className="py-20 px-4 bg-white" id="contact">
       <div className="max-w-4xl mx-auto">
-        <h2 className="text-3xl font-bold mb-6 text-center text-red-700">Contact Us</h2>
-        <form onSubmit={handleSubmit} className="space-y-4 bg-gray-50 p-6 rounded-lg shadow">
-          <input
-            type="text"
-            name="name"
-            placeholder="Your Name"
-            className="w-full p-3 border rounded"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="Your Email"
-            className="w-full p-3 border rounded"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
+        <h2 className="text-4xl font-extrabold text-center text-red-600 mb-10">
+          Contact Us
+        </h2>
+
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-6 bg-red-50 p-8 rounded-xl shadow-lg"
+        >
+          <div className="relative">
+            <FaUser className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            <input
+              type="text"
+              name="name"
+              placeholder="Your Name"
+              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="relative">
+            <FaEnvelope className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            <input
+              type="email"
+              name="email"
+              placeholder="Your Email"
+              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
           <textarea
             name="message"
             placeholder="Your Message"
-            rows="4"
-            className="w-full p-3 border rounded"
+            rows="5"
+            className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 resize-none"
             value={formData.message}
             onChange={handleChange}
             required
-          />
-          <button type="submit" className="bg-red-600 text-white px-6 py-3 rounded hover:bg-red-700">
-            Send Message
+          ></textarea>
+
+          <button
+            type="submit"
+            className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 rounded-lg flex items-center justify-center gap-2 transition"
+          >
+            <FaPaperPlane /> Send Message
           </button>
         </form>
-        <div className="mt-6 text-center text-gray-700">
-          <p>📞 Phone: +880 1234-567890</p>
-          <p>📧 Email: contact@bloodcare.org</p>
+
+        <div className="mt-8 text-center text-gray-700 space-y-2">
+          <p className="flex justify-center items-center gap-2">
+            <FaPhoneAlt className="text-red-500" /> +880 1234-567890
+          </p>
+          <p className="flex justify-center items-center gap-2">
+            <FaEnvelope className="text-red-500" /> contact@bloodcare.org
+          </p>
         </div>
       </div>
     </section>
   );
 };
 
-export default ContractUs;
+export default ContactUs;

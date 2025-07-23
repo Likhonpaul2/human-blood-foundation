@@ -6,6 +6,11 @@ function BlogDetailPage() {
     const [blog, setBlog] = useState(null);
     const [loading, setLoading] = useState(true);
 
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        document.title = "Blog Details||Human Blood Foundation"
+    }, [])
     useEffect(() => {
         // Replace with your API call: fetch blog by ID
         fetch(`${import.meta.env.VITE_server}api/blogs/${id}`)
@@ -32,7 +37,7 @@ function BlogDetailPage() {
         );
 
     return (
-        <div className="container mx-auto p-4 max-w-3xl">
+        <div className="container mx-auto p-4 max-w-3xl min-h-screen">
             <h1 className="text-4xl font-bold mb-4">{blog.title}</h1>
             <p className="text-gray-600 mb-2">
                 By {blog.author} - {new Date(blog.createdAt).toLocaleDateString()}

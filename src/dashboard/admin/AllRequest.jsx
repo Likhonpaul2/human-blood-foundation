@@ -8,8 +8,8 @@ const AllRequest = () => {
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_server}total-blood-req`)
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         setRequests(data);
         setLoading(false);
       });
@@ -21,17 +21,16 @@ const AllRequest = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status: newStatus }),
     })
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(() => {
-
-        setRequests(prev =>
-          prev.map(r => (r._id === id ? { ...r, status: newStatus } : r))
+        setRequests((prev) =>
+          prev.map((r) => (r._id === id ? { ...r, status: newStatus } : r))
         );
       });
   };
 
   const filteredRequests =
-    filter === "all" ? requests : requests.filter(r => r.status === filter);
+    filter === "all" ? requests : requests.filter((r) => r.status === filter);
 
   if (loading) {
     return (
@@ -60,8 +59,8 @@ const AllRequest = () => {
         </select>
       </div>
 
-      {/* Table */}
-      <div className="overflow-x-auto rounded-lg border border-gray-200">
+      {/* Large screen: Table */}
+      <div className="hidden lg:block overflow-x-auto rounded-lg border border-gray-200">
         <table className="min-w-full text-sm text-left">
           <thead className="bg-gray-100 text-gray-700">
             <tr>
@@ -84,7 +83,9 @@ const AllRequest = () => {
                 <td className="p-3">
                   <select
                     value={req.status}
-                    onChange={(e) => handleStatusChange(req._id, e.target.value)}
+                    onChange={(e) =>
+                      handleStatusChange(req._id, e.target.value)
+                    }
                     className="px-2 py-1 border rounded-md"
                   >
                     <option value="pending">Pending</option>
@@ -97,6 +98,52 @@ const AllRequest = () => {
             ))}
           </tbody>
         </table>
+      </div>
+
+      {/* Small/Tablet screen: Card View */}
+      <div className="grid lg:hidden gap-4">
+        {filteredRequests.map((req) => (
+          <div
+            key={req._id}
+            className="border p-4 rounded-lg shadow-sm bg-white space-y-2"
+          >
+            <div>
+              <span className="font-semibold">Recipient:</span>{" "}
+              {req.recipientName}
+            </div>
+            <div>
+              <span className="font-semibold">Hospital:</span>{" "}
+              {req.hospitalName}
+            </div>
+            <div>
+              <span className="font-semibold">Date:</span> {req.donationDate}
+            </div>
+            <div>
+              <span className="font-semibold">Time:</span> {req.donationTime}
+            </div>
+            <div>
+              <span className="font-semibold">Status:</span>{" "}
+              <span className="capitalize">{req.status}</span>
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-1">
+                Change Status:
+              </label>
+              <select
+                value={req.status}
+                onChange={(e) =>
+                  handleStatusChange(req._id, e.target.value)
+                }
+                className="w-full px-3 py-2 border rounded-md"
+              >
+                <option value="pending">Pending</option>
+                <option value="inprogress">In Progress</option>
+                <option value="done">Done</option>
+                <option value="canceled">Canceled</option>
+              </select>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

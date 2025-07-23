@@ -16,7 +16,7 @@ const MyRequest = () => {
 
   useEffect(() => {
     if (user?.email) {
-      fetch(`${import.meta.env.VITE_server}donation-requests/${user.email}`)
+      fetch(`${import.meta.env.VITE_server}donation-requests/email/${user.email}`)
         .then(res => res.json())
         .then(data => {
           setDonationRequests(data);

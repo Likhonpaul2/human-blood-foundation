@@ -93,7 +93,7 @@ const CheckoutForm = () => {
         setProcessing(false);
         return;
       }
-       
+
       console.log(paymentIntent);
       // STEP 3: Save payment history on success
       if (paymentIntent.status === 'succeeded') {
@@ -121,113 +121,114 @@ const CheckoutForm = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-white shadow-xl rounded-xl border border-gray-100">
-      <h2 className="text-xl font-semibold mb-4 text-center text-red-600 flex items-center justify-center gap-2">
-        💳 Support Human Blood Foundation
-      </h2>
+    <div className='min-h-[calc(100vh-4rem)] pt-10'>
+      <div className="max-w-md mx-auto p-6 bg-white shadow-xl rounded-xl border border-gray-100">
+        <h2 className="text-xl font-semibold mb-4 text-center text-red-600 flex items-center justify-center gap-2">
+          💳 Support Human Blood Foundation
+        </h2>
 
-      <p className="text-sm text-center text-gray-600 mb-4">
-        Your donation helps us run blood donation campaigns, maintain emergency services, and save lives.
-      </p>
+        <p className="text-sm text-center text-gray-600 mb-4">
+          Your donation helps us run blood donation campaigns, maintain emergency services, and save lives.
+        </p>
 
-      {/* Donation Amount Selector */}
-      <h3 className="font-semibold mb-2">Choose a donation amount:</h3>
-      <div className="flex flex-wrap gap-4 mb-4">
-        {[100, 200, 500].map((amount) => (
-          <label key={amount} className="flex items-center gap-1 cursor-pointer">
+        {/* Donation Amount Selector */}
+        <h3 className="font-semibold mb-2">Choose a donation amount:</h3>
+        <div className="flex flex-wrap gap-4 mb-4">
+          {[100, 200, 500].map((amount) => (
+            <label key={amount} className="flex items-center gap-1 cursor-pointer">
+              <input
+                type="radio"
+                name="amount"
+                checked={selectedAmount === amount}
+                onChange={() => handleAmountSelect(amount)}
+                className="accent-red-600"
+              />
+              ৳{amount}
+            </label>
+          ))}
+          <label className="flex items-center gap-1">
             <input
               type="radio"
               name="amount"
-              checked={selectedAmount === amount}
-              onChange={() => handleAmountSelect(amount)}
+              checked={selectedAmount === null && customAmount !== ''}
+              onChange={() => setSelectedAmount(null)}
               className="accent-red-600"
             />
-            ৳{amount}
+            Custom:
+            <input
+              type="number"
+              className="border border-gray-300 rounded px-2 py-1 w-20 ml-1 focus:outline-red-500"
+              placeholder="৳"
+              value={customAmount}
+              onChange={handleCustomChange}
+              min="1"
+            />
           </label>
-        ))}
-        <label className="flex items-center gap-1">
-          <input
-            type="radio"
-            name="amount"
-            checked={selectedAmount === null && customAmount !== ''}
-            onChange={() => setSelectedAmount(null)}
-            className="accent-red-600"
-          />
-          Custom:
-          <input
-            type="number"
-            className="border border-gray-300 rounded px-2 py-1 w-20 ml-1 focus:outline-red-500"
-            placeholder="৳"
-            value={customAmount}
-            onChange={handleCustomChange}
-            min="1"
-          />
-        </label>
-      </div>
-
-      {/* Stripe Card Input */}
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="border p-4 rounded-md shadow-sm bg-gray-50 focus-within:ring-2 ring-blue-500 transition">
-          <CardElement
-            options={{
-              style: {
-                base: {
-                  fontSize: '16px',
-                  color: '#333',
-                  '::placeholder': {
-                    color: '#aab7c4',
-                  },
-                },
-                invalid: {
-                  color: '#e5424d',
-                },
-              },
-            }}
-          />
         </div>
 
-        {/* Error & Success Messages */}
-        {cardError && (
-          <p className="text-red-500 text-sm mt-1 font-medium">{cardError}</p>
-        )}
-        {success && (
-          <p className="text-green-600 text-sm mt-1 font-medium">
-            Payment completed successfully!
-          </p>
-        )}
+        {/* Stripe Card Input */}
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="border p-4 rounded-md shadow-sm bg-gray-50 focus-within:ring-2 ring-blue-500 transition">
+            <CardElement
+              options={{
+                style: {
+                  base: {
+                    fontSize: '16px',
+                    color: '#333',
+                    '::placeholder': {
+                      color: '#aab7c4',
+                    },
+                  },
+                  invalid: {
+                    color: '#e5424d',
+                  },
+                },
+              }}
+            />
+          </div>
 
-        {/* Submit Button */}
-        <button
-          type="submit"
-          disabled={!stripe || processing}
-          className={`w-full py-2 rounded-md text-white font-medium transition ${
-            processing ? 'bg-gray-400 cursor-not-allowed' : 'bg-red-600 hover:bg-red-700'
-          }`}
-        >
-          {processing ? (
-            <span className="flex items-center justify-center gap-2">
-              <svg className="animate-spin h-4 w-4 text-white" viewBox="0 0 24 24" fill="none">
-                <circle
-                  className="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                />
-                <path
-                  className="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
-                />
-              </svg>
-              Processing...
-            </span>
-          ) : (
-            'Contribute to Human Blood Foundation'
+          {/* Error & Success Messages */}
+          {cardError && (
+            <p className="text-red-500 text-sm mt-1 font-medium">{cardError}</p>
           )}
-        </button>
-      </form>
+          {success && (
+            <p className="text-green-600 text-sm mt-1 font-medium">
+              Payment completed successfully!
+            </p>
+          )}
+
+          {/* Submit Button */}
+          <button
+            type="submit"
+            disabled={!stripe || processing}
+            className={`w-full py-2 rounded-md text-white font-medium transition ${processing ? 'bg-gray-400 cursor-not-allowed' : 'bg-red-600 hover:bg-red-700'
+              }`}
+          >
+            {processing ? (
+              <span className="flex items-center justify-center gap-2">
+                <svg className="animate-spin h-4 w-4 text-white" viewBox="0 0 24 24" fill="none">
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  />
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                  />
+                </svg>
+                Processing...
+              </span>
+            ) : (
+              'Contribute to Human Blood Foundation'
+            )}
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

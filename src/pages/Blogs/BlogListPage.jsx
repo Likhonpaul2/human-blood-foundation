@@ -6,6 +6,10 @@ function BlogListPage() {
     const [searchTerm, setSearchTerm] = useState("");
 
     useEffect(() => {
+        window.scrollTo(0, 0);
+        document.title = "Blogs||Human Blood Foundation"
+    }, [])
+    useEffect(() => {
         // Example fetch, replace with your API URL or data source
         fetch(`${import.meta.env.VITE_server}api/blogs?status=published`)
             .then((res) => res.json())
@@ -22,7 +26,7 @@ function BlogListPage() {
     );
 
     return (
-        <div className="container mx-auto p-4">
+        <div className="container mx-auto p-4 min-h-screen">
             <h1 className="text-3xl font-bold mb-6">Blogs</h1>
 
             {/* Optional Search */}
@@ -33,9 +37,7 @@ function BlogListPage() {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
             />
-            {
-                console.log(blogs)
-            }
+            
 
             {filteredBlogs.length === 0 ? (
                 <p>No blogs found.</p>

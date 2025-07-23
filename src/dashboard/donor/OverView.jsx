@@ -11,7 +11,7 @@ const OverView = () => {
   useEffect(() => {
     const fetchRequests = async () => {
       try {
-        const res = await fetch(`${import.meta.env.VITE_server}donation-requests/${user?.email}`);
+        const res = await fetch(`${import.meta.env.VITE_server}donation-requests/email/${user?.email}`);
         const data = await res.json();
         setDonationRequests(data);
         console.log(data)
@@ -96,7 +96,7 @@ const OverView = () => {
                   <tr key={req._id}>
                     <td>{index + 1}</td>
                     <td>{req.recipientName}</td>
-                    <td>{req.district}, {req.upazila}</td>
+                    <td>{req.district} {req.upazila}</td>
                     <td>{req.bloodGroup}</td>
                     <td>{req.donationDate}</td>
                     <td>{req.donationTime}</td>

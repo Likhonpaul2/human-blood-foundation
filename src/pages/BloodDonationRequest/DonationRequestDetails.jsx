@@ -13,6 +13,11 @@ const DonationRequestDetails = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        window.scrollTo(0, 0);
+        document.title = "Donation request ||Human Blood Foundation"
+    }, [])
+
+    useEffect(() => {
         if (!user) {
             navigate("/login");
         } else {

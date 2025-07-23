@@ -42,27 +42,27 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/search-donors",
-                element: <SearchDonors/>
+                element: <SearchDonors />
             },
             {
                 path: "/blood-donation-request",
-                element: <BloodDonationRequests/>
+                element: <BloodDonationRequests />
             },
             {
                 path: "/donation-request/:id",
-                element: <DonationRequestDetails/>
+                element: <ProtectedRoute><DonationRequestDetails /></ProtectedRoute>
             },
             {
                 path: "/blogs",
-                element: <BlogListPage/>
+                element: <BlogListPage />
             },
             {
                 path: "/blogs/:id",
-                element: <BlogDetailPage/>
+                element: <ProtectedRoute><BlogDetailPage /></ProtectedRoute>
             },
             {
                 path: "/funding",
-                element: <FundingPage/>
+                element: <ProtectedRoute><FundingPage /></ProtectedRoute>
             },
         ]
     },
@@ -72,23 +72,23 @@ export const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <OverView />
+                element: <ProtectedRoute><OverView /></ProtectedRoute>
             },
             {
                 path: "/dashboard/profile",
-                element: <ProfilePage />
+                element: <ProtectedRoute><ProfilePage /></ProtectedRoute>
             },
             {
                 path: "/dashboard/create-donation",
-                element: <CreateRequest />
+                element: <ProtectedRoute><CreateRequest /></ProtectedRoute>
             },
             {
                 path: "/dashboard/my-donation-requests",
-                element: <MyRequest />
+                element: <ProtectedRoute><MyRequest /></ProtectedRoute>
             },
             {
                 path: "/dashboard/edit-donation/:id",
-                element: <UpdateDetails />
+                element: <ProtectedRoute><UpdateDetails /></ProtectedRoute>
             },
 
 
@@ -96,23 +96,23 @@ export const router = createBrowserRouter([
             {
                 path: "/dashboard/admin",
                 // index: true,
-                element: <DashboardHomeAdmin />
+                element: <ProtectedRoute><DashboardHomeAdmin /></ProtectedRoute>
             },
             {
                 path: "/dashboard/all-users",
-                element: <AllUsers />
+                element: <ProtectedRoute><AllUsers /></ProtectedRoute>
             },
             {
                 path: "/dashboard/all-blood-donation-request",
-                element: <AllRequest />
+                element: <ProtectedRoute><AllRequest /></ProtectedRoute>
             },
             {
                 path: "/dashboard/content-management",
-                element: <ContentManagement />
+                element: <ProtectedRoute><ContentManagement /></ProtectedRoute>
             },
             {
                 path: "/dashboard/content-management/add-blog",
-                element: <AddBlogPage />
+                element: <ProtectedRoute><AddBlogPage /></ProtectedRoute>
             },
 
 
@@ -120,15 +120,15 @@ export const router = createBrowserRouter([
             {
                 path: "/dashboard/volunteer",
                 // index: true,
-                element: <DashboardHomeAdmin />
+                element: <ProtectedRoute><DashboardHomeAdmin /></ProtectedRoute>
             },
             {
                 path: "/dashboard/all-blood-donation-request/volunteer",
-                element: <AllRequest />
+                element: <ProtectedRoute><AllRequest /></ProtectedRoute>
             },
             {
                 path: "/dashboard/content-management/volunteer",
-                element: <ContentManagement />
+                element: <ProtectedRoute><ContentManagement /></ProtectedRoute>
             },
 
         ]

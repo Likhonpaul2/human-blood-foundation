@@ -29,7 +29,7 @@ const DashboardHomeAdmin = () => {
         fetch(`${import.meta.env.VITE_server}payment/total-funds`)
             .then((res) => res.json())
             .then((data) => {
-                console.log("Total funds:", data.totalAmount);
+                // console.log("Total funds:", data.totalAmount);
                 setTotalFunds(data.totalAmount);
             });
     }, []);

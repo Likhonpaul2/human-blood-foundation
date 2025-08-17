@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import { FaSpinner } from "react-icons/fa";
+import { CircularProgress, 
+         Table, TableBody, TableCell, TableContainer, TableHead, TableRow, 
+         Paper, Select, MenuItem, Typography, Card, CardContent, FormControl, InputLabel } from "@mui/material";
 
 const AllRequest = () => {
   const [requests, setRequests] = useState([]);
@@ -35,114 +37,101 @@ const AllRequest = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-60">
-        <FaSpinner className="animate-spin text-3xl text-red-500" />
+        <CircularProgress color="error" />
       </div>
     );
   }
 
   return (
     <div className="p-4 md:p-8">
-      <h2 className="text-2xl font-bold mb-4">All Blood Donation Requests 🩸</h2>
+      <Typography variant="h5" fontWeight="bold" gutterBottom>
+        All Blood Donation Requests 🩸
+      </Typography>
 
       {/* Filter */}
-      <div className="mb-4">
-        <select
+      <FormControl sx={{ mb: 3, minWidth: 200 }}>
+        <InputLabel>Status Filter</InputLabel>
+        <Select
           value={filter}
+          label="Status Filter"
           onChange={(e) => setFilter(e.target.value)}
-          className="border px-3 py-2 rounded-md"
         >
-          <option value="all">All</option>
-          <option value="pending">Pending</option>
-          <option value="inprogress">In Progress</option>
-          <option value="done">Done</option>
-          <option value="canceled">Canceled</option>
-        </select>
-      </div>
+          <MenuItem value="all">All</MenuItem>
+          <MenuItem value="pending">Pending</MenuItem>
+          <MenuItem value="inprogress">In Progress</MenuItem>
+          <MenuItem value="done">Done</MenuItem>
+          <MenuItem value="canceled">Canceled</MenuItem>
+        </Select>
+      </FormControl>
 
-      {/* Large screen: Table */}
-      <div className="hidden lg:block overflow-x-auto rounded-lg border border-gray-200">
-        <table className="min-w-full text-sm text-left">
-          <thead className="bg-gray-100 text-gray-700">
-            <tr>
-              <th className="p-3">Recipient</th>
-              <th className="p-3">Hospital</th>
-              <th className="p-3">Date</th>
-              <th className="p-3">Time</th>
-              <th className="p-3">Status</th>
-              <th className="p-3">Change Status</th>
-            </tr>
-          </thead>
-          <tbody>
+      {/* Large Screen: Table */}
+      <TableContainer component={Paper} sx={{ display: { xs: "none", lg: "block" } }}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Recipient</TableCell>
+              <TableCell>Hospital</TableCell>
+              <TableCell>Date</TableCell>
+              <TableCell>Time</TableCell>
+              <TableCell>Status</TableCell>
+              <TableCell>Change Status</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
             {filteredRequests.map((req) => (
-              <tr key={req._id} className="border-t">
-                <td className="p-3">{req.recipientName}</td>
-                <td className="p-3">{req.hospitalName}</td>
-                <td className="p-3">{req.donationDate}</td>
-                <td className="p-3">{req.donationTime}</td>
-                <td className="p-3 capitalize font-semibold">{req.status}</td>
-                <td className="p-3">
-                  <select
+              <TableRow key={req._id}>
+                <TableCell>{req.recipientName}</TableCell>
+                <TableCell>{req.hospitalName}</TableCell>
+                <TableCell>{req.donationDate}</TableCell>
+                <TableCell>{req.donationTime}</TableCell>
+                <TableCell sx={{ textTransform: "capitalize", fontWeight: "bold" }}>
+                  {req.status}
+                </TableCell>
+                <TableCell>
+                  <Select
+                    size="small"
                     value={req.status}
-                    onChange={(e) =>
-                      handleStatusChange(req._id, e.target.value)
-                    }
-                    className="px-2 py-1 border rounded-md"
+                    onChange={(e) => handleStatusChange(req._id, e.target.value)}
                   >
-                    <option value="pending">Pending</option>
-                    <option value="inprogress">In Progress</option>
-                    <option value="done">Done</option>
-                    <option value="canceled">Canceled</option>
-                  </select>
-                </td>
-              </tr>
+                    <MenuItem value="pending">Pending</MenuItem>
+                    <MenuItem value="inprogress">In Progress</MenuItem>
+                    <MenuItem value="done">Done</MenuItem>
+                    <MenuItem value="canceled">Canceled</MenuItem>
+                  </Select>
+                </TableCell>
+              </TableRow>
             ))}
-          </tbody>
-        </table>
-      </div>
+          </TableBody>
+        </Table>
+      </TableContainer>
 
-      {/* Small/Tablet screen: Card View */}
-      <div className="grid lg:hidden gap-4">
+      {/* Small/Tablet Screen: Card View */}
+      <div className="grid gap-4 lg:hidden">
         {filteredRequests.map((req) => (
-          <div
-            key={req._id}
-            className="border p-4 rounded-lg shadow-sm bg-white space-y-2"
-          >
-            <div>
-              <span className="font-semibold">Recipient:</span>{" "}
-              {req.recipientName}
-            </div>
-            <div>
-              <span className="font-semibold">Hospital:</span>{" "}
-              {req.hospitalName}
-            </div>
-            <div>
-              <span className="font-semibold">Date:</span> {req.donationDate}
-            </div>
-            <div>
-              <span className="font-semibold">Time:</span> {req.donationTime}
-            </div>
-            <div>
-              <span className="font-semibold">Status:</span>{" "}
-              <span className="capitalize">{req.status}</span>
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-1">
-                Change Status:
-              </label>
-              <select
-                value={req.status}
-                onChange={(e) =>
-                  handleStatusChange(req._id, e.target.value)
-                }
-                className="w-full px-3 py-2 border rounded-md"
-              >
-                <option value="pending">Pending</option>
-                <option value="inprogress">In Progress</option>
-                <option value="done">Done</option>
-                <option value="canceled">Canceled</option>
-              </select>
-            </div>
-          </div>
+          <Card key={req._id} variant="outlined">
+            <CardContent>
+              <Typography><b>Recipient:</b> {req.recipientName}</Typography>
+              <Typography><b>Hospital:</b> {req.hospitalName}</Typography>
+              <Typography><b>Date:</b> {req.donationDate}</Typography>
+              <Typography><b>Time:</b> {req.donationTime}</Typography>
+              <Typography sx={{ textTransform: "capitalize" }}>
+                <b>Status:</b> {req.status}
+              </Typography>
+              <FormControl fullWidth sx={{ mt: 2 }}>
+                <InputLabel>Change Status</InputLabel>
+                <Select
+                  value={req.status}
+                  label="Change Status"
+                  onChange={(e) => handleStatusChange(req._id, e.target.value)}
+                >
+                  <MenuItem value="pending">Pending</MenuItem>
+                  <MenuItem value="inprogress">In Progress</MenuItem>
+                  <MenuItem value="done">Done</MenuItem>
+                  <MenuItem value="canceled">Canceled</MenuItem>
+                </Select>
+              </FormControl>
+            </CardContent>
+          </Card>
         ))}
       </div>
     </div>

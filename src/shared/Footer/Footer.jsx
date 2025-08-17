@@ -1,10 +1,12 @@
+import { Link } from "react-router";
+
 const Footer = () => {
   return (
     <footer className="bg-gray-900 text-white py-10 mt-10">
       <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
         {/* Logo & Intro */}
         <div>
-          <h1 className="text-2xl font-bold text-pink-500 mb-2">Human Blood Foundation</h1>
+          <h1 className="text-2xl font-bold text-[#DD000A] mb-2">Human Blood Foundation</h1>
           <p className="text-sm text-gray-400">
             Saving lives one drop at a time. Join our community and make a difference.
           </p>
@@ -16,8 +18,8 @@ const Footer = () => {
           <ul className="space-y-2 text-sm text-gray-300">
             <li><a href="/" className="hover:text-white">Home</a></li>
             <li><a href="/blogs" className="hover:text-white">Blogs</a></li>
-            <li><a href="#" className="hover:text-white">About</a></li>
-            <li><a href="#" className="hover:text-white">Contact</a></li>
+            <li><Link to={"/about"} className="hover:text-white">About</Link></li>
+            <li><Link to={"/contact"} className="hover:text-white">Contact</Link></li>
           </ul>
         </div>
 

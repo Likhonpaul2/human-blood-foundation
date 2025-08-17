@@ -23,6 +23,8 @@ import BlogListPage from "../pages/Blogs/BlogListPage";
 import BlogDetailPage from "../pages/Blogs/BlogDetailPage";
 import FundingPage from "../pages/FundingPage/FundingPage";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import AboutPage from "../shared/Footer/AboutPage";
+import ContactPage from "../shared/Footer/ContactPage";
 
 export const router = createBrowserRouter([
     {
@@ -66,6 +68,14 @@ export const router = createBrowserRouter([
                 path: "/funding",
                 element: <ProtectedRoute><FundingPage /></ProtectedRoute>
             },
+            {
+                path: "/about",
+                element: <AboutPage/>
+            },
+            {
+                path: "/contact",
+                element: <ContactPage/>
+            }
         ]
     },
     {

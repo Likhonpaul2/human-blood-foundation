@@ -37,7 +37,7 @@ const Login = () => {
     }, [])
 
     return (
-        <div className="min-h-screen">
+        <div className="min-h-screen pt-30">
             <div className="max-w-md mx-auto mt-20 p-8 bg-white rounded-xl shadow-lg">
                 <h2 className="text-3xl font-bold mb-6 text-center text-red-600">
                     Sign In

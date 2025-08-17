@@ -129,7 +129,7 @@ const Register = () => {
 
 
   return (
-    <div className='min-h-screen'>
+    <div className='min-h-screen pt-30'>
       <div className="max-w-lg mx-auto mt-12 p-6 bg-white rounded shadow-md">
         <h2 className="text-2xl font-semibold mb-6 text-center text-red-600">Register as Donor</h2>
         <form onSubmit={handleSubmit} noValidate className='space-y-5'>

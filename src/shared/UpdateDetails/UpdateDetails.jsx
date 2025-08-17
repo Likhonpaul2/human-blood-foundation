@@ -54,7 +54,7 @@ const UpdateDetails = () => {
     if (!formData) return <div className="text-center mt-20 text-lg">Loading...</div>;
 
     return (
-        <div className="max-w-4xl mx-auto p-4 md:p-8 bg-white rounded-2xl shadow-lg mt-6">
+        <div className="max-w-4xl mx-auto p-4 md:p-8 bg-white rounded-2xl shadow-lg mt-6 pt-30">
             <h2 className="text-2xl md:text-3xl font-semibold text-center mb-6 text-red-600">Update Donation Request</h2>
 
             <form onSubmit={handleFormSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">

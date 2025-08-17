@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router";
 import { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import toast from "react-hot-toast";
+import Loader from "../../shared/Loader/Loader";
 
 const DonationRequestDetails = () => {
     const { id } = useParams();
@@ -39,7 +40,7 @@ const DonationRequestDetails = () => {
         }
     };
 
-    if (!request) return <p className="text-center mt-10">Loading...</p>;
+    if (!request) return <Loader/>;
 
     return (
         <div className="max-w-4xl mx-auto px-6 py-10 min-h-screen pt-30">

@@ -7,7 +7,7 @@ import { AuthContext } from "../../context/AuthContext";
 
 
 const Login = () => {
-    const { SignInEmailAndPass } = useContext(AuthContext);
+    const {SignInEmailAndPass } = useContext(AuthContext);
     const {
         register,
         handleSubmit,

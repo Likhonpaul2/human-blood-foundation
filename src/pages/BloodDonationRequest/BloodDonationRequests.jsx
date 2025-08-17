@@ -11,8 +11,12 @@ const BloodDonationRequests = () => {
       .then((data) => setRequests(data));
   }, []);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
-    <div className="max-w-7xl mx-auto px-4 py-10 min-h-screen bg-gray-50 pt-30">
+    <div className="max-w-7xl mx-auto px-4 py-10 min-h-screen  pt-30">
       <h2 className="text-3xl font-bold text-red-700 mb-10 text-center">
         🩸 Pending Blood Donation Requests
       </h2>

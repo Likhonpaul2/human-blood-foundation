@@ -37,7 +37,7 @@ function BlogDetailPage() {
         );
 
     return (
-        <div className="container mx-auto p-4 max-w-3xl min-h-screen">
+        <div className="container mx-auto p-4 max-w-3xl min-h-screen pt-30">
             <h1 className="text-4xl font-bold mb-4">{blog.title}</h1>
             <p className="text-gray-600 mb-2">
                 By {blog.author} - {new Date(blog.createdAt).toLocaleDateString()}

@@ -36,7 +36,7 @@ const SearchDonors = () => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-6 py-10 min-h-screen">
+    <div className="max-w-5xl mx-auto px-6 py-10 min-h-screen pt-30">
       <h2 className="text-3xl md:text-4xl font-bold text-center text-red-700 mb-10">
         🩸 Search Blood Donors
       </h2>

@@ -42,7 +42,7 @@ const DonationRequestDetails = () => {
     if (!request) return <p className="text-center mt-10">Loading...</p>;
 
     return (
-        <div className="max-w-4xl mx-auto px-6 py-10 min-h-screen">
+        <div className="max-w-4xl mx-auto px-6 py-10 min-h-screen pt-30">
             <h2 className="text-3xl font-bold text-red-700 mb-6 text-center">
                 🩸 Donation Request Details
             </h2>

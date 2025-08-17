@@ -26,7 +26,7 @@ function BlogListPage() {
     );
 
     return (
-        <div className="container mx-auto p-4 min-h-screen">
+        <div className="container mx-auto p-4 min-h-screen pt-30">
             <h1 className="text-3xl font-bold mb-6">Blogs</h1>
 
             {/* Optional Search */}

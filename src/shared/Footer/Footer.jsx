@@ -27,10 +27,10 @@ const Footer = () => {
         <div>
           <h2 className="font-semibold text-lg mb-2">Donation</h2>
           <ul className="space-y-2 text-sm text-gray-300">
-            <li><a href="#" className="hover:text-white">Dashboard</a></li>
-            <li><a href="#" className="hover:text-white">Request Blood</a></li>
-            <li><a href="#" className="hover:text-white">Find Donors</a></li>
-            <li><a href="#" className="hover:text-white">FAQ</a></li>
+            {/* <li><a href="#" className="hover:text-white">Dashboard</a></li> */}
+            <li><Link to={"/blood-donation-request"} className="hover:text-white">Request Blood</Link></li>
+            <li><Link to={"/search-donors"} className="hover:text-white">Find Donors</Link></li>
+            {/* <li><a href="#" className="hover:text-white">FAQ</a></li> */}
           </ul>
         </div>
 

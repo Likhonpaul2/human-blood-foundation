@@ -121,7 +121,7 @@ const CheckoutForm = () => {
   };
 
   return (
-    <div className='min-h-[calc(100vh-4rem)] pt-10'>
+    <div className='min-h-[calc(100vh-4rem)] pt-30'>
       <div className="max-w-md mx-auto p-6 bg-white shadow-xl rounded-xl border border-gray-100">
         <h2 className="text-xl font-semibold mb-4 text-center text-red-600 flex items-center justify-center gap-2">
           💳 Support Human Blood Foundation
